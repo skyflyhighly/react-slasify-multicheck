@@ -5,6 +5,8 @@ import { FC } from "react";
 
 import { Checkbox } from "../components/Checkbox";
 
+import { arrangeArrayByColumns } from "../utils";
+
 export type Option = {
   label: string;
   value: string;
@@ -66,8 +68,8 @@ export const MultiCheck: FC<Props> = ({
       },
       ...filteredList,
     ];
-    return stepList;
-  }, [internalValues, options]);
+    return arrangeArrayByColumns(stepList, columns);
+  }, [internalValues, options, columns]);
 
   useEffect(() => {
     setInternalValues(values || []);
@@ -90,7 +92,12 @@ export const MultiCheck: FC<Props> = ({
   return (
     <div>
       {label && <h1>{label}</h1>}
-      <ul className="MultiCheck">
+      <ul
+        className="MultiCheck"
+        style={{
+          gridTemplateColumns: "auto ".repeat(columns).trim(),
+        }}
+      >
         {stepList?.map((item) => (
           <li key={item.value}>
             <Checkbox
