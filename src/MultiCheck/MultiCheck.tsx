@@ -17,7 +17,7 @@ export type Option = {
  * 1. There should be a special `Select All` option with checkbox to control all passing options
  * 2. All the options (including the "Select All") should be split into several columns, and the order is from top to bottom in each column
  */
-type Props = {
+export type MutlicheckProps = {
   // the label text of the whole component
   label?: string;
   // Assume no duplicated labels or values
@@ -41,7 +41,7 @@ type Props = {
 
 const uniqueValue = Math.random().toString(36).substring(2, 15);
 
-export const MultiCheck: FC<Props> = ({
+export const MultiCheck: FC<MutlicheckProps> = ({
   label,
   options,
   columns = 1,
@@ -99,7 +99,7 @@ export const MultiCheck: FC<Props> = ({
         }}
       >
         {stepList?.map((item) => (
-          <li key={item.value}>
+          <li key={item.value} className="Checkbox">
             <Checkbox
               label={item.label}
               checked={item.checked}
